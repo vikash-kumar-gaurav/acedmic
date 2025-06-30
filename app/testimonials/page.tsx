@@ -178,13 +178,13 @@ export default function TestimonialsCarousel() {
           if (!videoId) return null;
 
           return (
-            <div key={index} className="h-96 bg-orange-100 w-4xl px-4">
+            <div key={index} className="h-96 bg-orange-100 w-96 px-4">
               <div className="aspect-w-16 aspect-h-9">
                 <iframe
                   src={`https://www.youtube.com/embed/${videoId}`}
                   title={`YouTube video ${index + 1}`}
                   className="w-full h-96 rounded-xl shadow-lg"
-                  frameBorder="0"
+                  frameBorder="1"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
