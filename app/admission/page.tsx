@@ -1,301 +1,155 @@
 
-"use client";
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { GiDiscussion } from "react-icons/gi";
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { FaInfoCircle, FaFileAlt, FaEdit, FaComments, FaClipboardList, FaGraduationCap } from 'react-icons/fa';
-import { IoIosCheckmarkCircle, IoIosCalendar } from 'react-icons/io';
-import { HiLightBulb } from 'react-icons/hi';
-import { MdAccessTime, MdOutlineDescription } from 'react-icons/md';
+import { FaUserEdit, FaClipboardCheck, FaUserTie, FaUsers, FaYoutube, FaArrowRight, FaQuestionCircle, FaUserGraduate } from 'react-icons/fa';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
-
-const AdmissionProcess = () => {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const infoRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-
-  useEffect(() => {
-    // Header animation
-    gsap.from(headerRef.current, {
-      opacity: 0,
-      y: -30,
-      duration: 1,
-      ease: "power3.out",
-    });
-
-    // Timeline container animation
-    gsap.from(timelineRef.current, {
-      opacity: 0,
-      y: 20,
-      scrollTrigger: {
-        trigger: timelineRef.current,
-        start: "top 90%",
-      },
-      duration: 0.8,
-      delay: 0.2,
-    });
-
-    // Step animations
-    stepRefs.current.forEach((step, index) => {
-      if (step) {
-        gsap.from(step, {
-          opacity: 0,
-          y: 30,
-          scrollTrigger: {
-            trigger: step,
-            start: "top 90%",
-          },
-          duration: 0.8,
-          delay: index * 0.15,
-        });
-      }
-    });
-
-    // Additional info animation
-    gsap.from(infoRef.current, {
-      opacity: 0,
-      y: 30,
-      scrollTrigger: {
-        trigger: infoRef.current,
-        start: "top 90%",
-      },
-      duration: 0.8,
-      delay: 0.2,
-    });
-
-    // CTA animation
-    gsap.from(ctaRef.current, {
-      opacity: 0,
-      y: 30,
-      scrollTrigger: {
-        trigger: ctaRef.current,
-        start: "top 90%",
-      },
-      duration: 0.8,
-      delay: 0.2,
-    });
-  }, []);
-
-  const admissionSteps = [
-    
+const AdmissionProcessPage = () => {
+  const steps = [
     {
       id: 1,
-      title: "Admission Form",
-      icon: <FaFileAlt className="text-xl" />,
-      description: "Complete our comprehensive online application form with your personal and academic details.",
-      details: "The application form requires your personal information, academic history, extracurricular activities, and a personal statement. Ensure all details are accurate and complete. You'll need to provide transcripts, letters of recommendation, and any standardized test scores.",
-      date: "Apply Online"
+      title: "Online Registration",
+      description: "Fill out our simple online application form with basic information about your child and your family.",
+      icon: <FaUserEdit className="text-blue-500 text-3xl" />,
+      image: "https://plus.unsplash.com/premium_photo-1661371736790-de30674f9e46?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Zm9ybSUyMGZpbGxpbmd8ZW58MHx8MHx8fDA%3D"
     },
     {
       id: 2,
-      title: "Written Exam",
-      icon: <FaEdit className="text-xl" />,
-      description: "Demonstrate your academic abilities through our standardized entrance examination.",
-      details: "The written exam assesses critical thinking, problem-solving abilities, and subject-specific knowledge. It typically includes sections on mathematics, language skills, and logical reasoning. Preparation materials and sample questions are available on our website.",
-      date: "Scheduled 3 months before term"
+      title: "Entrance Examination",
+      description: "Students will take a brief assessment to help us understand their current academic level.",
+      icon: <FaClipboardCheck className="text-red-500 text-3xl" />,
+      image: "https://scontent-del2-3.xx.fbcdn.net/v/t39.30808-6/485004483_1050978943724711_2149463396478522350_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=Y2Yxm-6CXzYQ7kNvwHJaBr8&_nc_oc=AdmLeu5Yui6Czro7Ya7WwVbR2ZSDq0hxDK7Vw7UsCKqv_HdLKKrGFQN7Cx28PS61als&_nc_zt=23&_nc_ht=scontent-del2-3.xx&_nc_gid=7AkrmNFqBYx4J05YTRxofg&oh=00_AfN-kz4THH5WFvcgOaXbmQV0tp9V2D1Zxe60aOhaZ_TqCA&oe=68698997"
     },
     {
       id: 3,
-      title: "Interview",
-      icon: <FaComments className="text-xl" />,
-      description: "Participate in a personal interview with our admission committee.",
-      details: "The interview allows us to learn more about your interests, goals, and personality. It's an opportunity for you to showcase your communication skills, intellectual curiosity, and passion for learning. Interviews are conducted either in-person or virtually.",
-      date: "Scheduled 2 months before term"
+      title: "Student Interview",
+      description: "A friendly conversation with our faculty to get to know your child better.",
+      icon: <FaUserTie className="text-blue-500 text-3xl" />,
+      image: "https://scontent-del1-1.xx.fbcdn.net/v/t39.30808-6/487286907_1060133819475890_7989696927894130848_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=m4_vREb3Bv0Q7kNvwHNZksG&_nc_oc=AdkAWJ1FpzqnycTydGYiAj56952QbA9NiPOSn85BmXKu-gRx_LYdHg1taAmn4bQCpwo&_nc_zt=23&_nc_ht=scontent-del1-1.xx&_nc_gid=df0JqJCzfrMOU17aYspIYA&oh=00_AfNWbXhIvbQrcJIYt0ZQclJMtwBCTafwN7gPVBI-hEHNTQ&oe=6869708C"
     },
     {
       id: 4,
-      title: "Parents-Intraction",
-      icon: <GiDiscussion className="text-xl" />,
-      description: "Intro to the the teachers for mitual understanding",
-      details: "The details intaction between teacher parents and students, given the intraction to the students and rules of the college more",
-      date: "Scheduled 2 months before term"
+      title: "Parent-Teacher Meeting",
+      description: "An opportunity for us to discuss your child's needs and our educational approach.",
+      icon: <FaUsers className="text-red-500 text-3xl" />,
+      image: "https://scontent-del1-1.xx.fbcdn.net/v/t39.30808-6/487181229_1060103419478930_6683140028752957733_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=HoPRiq_2XMsQ7kNvwE14jdC&_nc_oc=AdkDdPzxX5iraZDOBifA4HhtiTsHzDqIu2j2z_k-l_yEw4aDjWk6lDgMZ4AIaDSItA4&_nc_zt=23&_nc_ht=scontent-del1-1.xx&_nc_gid=DsKQ0l-k76nCT69CWNtLWQ&oh=00_AfOT2Fe9jZh8Xm8VVasUmd-7F8YO0dxnWV-Jd9h5yOMBZQ&oe=6869911C"
     }
-    
+  ];
+
+  const highlights = [
+    "Personalized learning approach",
+    "Experienced and caring faculty",
+    "State-of-the-art facilities",
+    "Inclusive and diverse community",
+    "Focus on holistic development"
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white py-12 px-4 sm:px-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-red-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div 
-          ref={headerRef}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Cimage <span className="text-orange-500">Admission Process</span>
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-600 mx-auto mb-6 rounded-full"></div>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Your journey to academic excellence begins here. Follow our step-by-step admission roadmap to join our vibrant learning community.
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Admission Process</h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Our simple 4-step admission process ensures we get to know each student and family personally.
           </p>
         </div>
 
-        {/* Timeline */}
-        <div ref={timelineRef} className="relative">
-          {/* Vertical line */}
-          <div className="hidden md:block absolute left-1/2 top-0 rounded-full bottom-0 w-1 bg-gradient-to-b from-orange-300 to-orange-100 transform -translate-x-1/2"></div>
-          
-          {/* Steps */}
-          <div className="space-y-12">
-            {admissionSteps.map((step, index) => (
-              <div 
-                key={step.id}
-                ref={(el:any) => stepRefs.current[index] = el}
-                className="relative group"
-              >
-                {/* Step container */}
-                <div className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} w-full`}>
-                  {/* Content */}
-                  <div className={`md:w-1/2 p-6 rounded-2xl bg-white shadow-lg border border-orange-100 transform transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group-hover:border-orange-300 ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}>
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white mr-4 shadow-md">
-                        {step.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-800">{step.title}</h3>
-                        <div className="flex items-center text-sm text-orange-600 mt-1">
-                          <IoIosCalendar className="mr-1" />
-                          <span>{step.date}</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-600 mb-4">{step.description}</p>
-                    <p className="text-gray-700">{step.details}</p>
-                    
-                    <div className="mt-4 flex items-center text-sm text-gray-500">
-                      <HiLightBulb className="text-orange-400 mr-2 text-lg" />
-                      <span className="font-medium">Tip: {index === 0 ? "Review requirements early" : index === 1 ? "Double-check all details" : index === 2 ? "Practice with sample questions" : index === 3 ? "Prepare questions to ask" : index === 4 ? "Check email regularly" : "Complete all paperwork promptly"}</span>
-                    </div>
-                  </div>
-                  
-                  {/* Circle marker */}
-                  <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-10">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold shadow-lg border-2 border-white">
-                      {step.id}
-                    </div>
-                  </div>
-                  
-                  {/* Mobile circle marker */}
-                  <div className="md:hidden w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold shadow-lg border-2 border-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0">
-                    {step.id}
-                  </div>
-                </div>
+        {/* Process Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {steps.map((step) => (
+            <div 
+              key={step.id} 
+              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="h-48 bg-gray-200 overflow-hidden">
+                
+                <img 
+                  src={step.image} 
+                  alt={step.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
-            ))}
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="mr-4 bg-white p-3 rounded-full shadow-sm">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800">{step.title}</h3>
+                </div>
+                <p className="text-gray-600">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Video Section */}
+        <div className="mb-16 bg-white rounded-xl shadow-md overflow-hidden ">
+          <div className="md:flex items-center">
+            <div className="md:w-1/2 p-8 flex items-start space-x-4">
+  {/* Icon */}
+  <div className="text-blue-500 mt-1">
+    <FaQuestionCircle size={32} />
+  </div>
+
+  {/* Text Content */}
+  <div>
+    <h2 className="text-2xl font-bold text-gray-800 mb-2">Still have questions?</h2>
+    <p className="text-gray-600">
+      Watch our short video that walks you through the entire admission process and what makes our school special.
+    </p>
+  </div>
+</div>
+            <div className="flex items-center justify-end w-full">
+              {/* YouTube video embed */}
+              <iframe src="https://www.youtube.com/embed/OM--5qQrZ8s?si=ACAb1e0ZEnH-hu6m" title="YouTube video player"  className='rounded-md w-full aspect-video border-2 m-3 max-w-2xl shadow-2xl' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+            </div>
           </div>
         </div>
 
-        {/* Additional Information */}
-        <div 
-          ref={infoRef}
-          className="mt-20 bg-white rounded-2xl shadow-lg p-8 border border-orange-100"
-        >
-          <div className="flex items-center mb-6">
-            <IoIosCheckmarkCircle className="text-3xl text-orange-500 mr-3" />
-            <h2 className="text-2xl font-bold text-gray-800">Key Admission Information</h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl border border-orange-100">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center">
-                <FaFileAlt className="text-orange-500 mr-2" /> Required Documents
-              </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Completed application form
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Official academic transcripts
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Aadhar card original
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span>10th and 12th Marksheet 
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Character certificata and Transfer certificata
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl border border-orange-100">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center">
-                <FaComments className="text-orange-500 mr-2" /> Admission Tips
-              </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Start your application early
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Tailor your personal statement to our values
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Highlight unique experiences and achievements
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Prepare thoughtful questions for the interview
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-500 mr-2">•</span> Follow up after each stage of the process
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="mt-8 pt-6 border-t border-orange-200">
-            <div className="flex items-start mb-4">
-              <MdOutlineDescription className="text-2xl text-orange-500 mr-3 mt-1" />
-              <h3 className="font-bold text-lg text-gray-800">Holistic Review Process</h3>
-            </div>
-            <p className="text-gray-700 pl-9">
-              Our admission committee takes a comprehensive approach to reviewing applications. While academic excellence is important, 
-              we also value diversity, leadership potential, and unique personal qualities. We encourage applications from all 
-              backgrounds and offer need-based financial aid to eligible students. Application fee waivers are available for 
-              qualifying candidates to ensure equal access to our programs.
-            </p>
-            
-            <div className="flex items-start mt-6">
-              <MdAccessTime className="text-2xl text-orange-500 mr-3 mt-1" />
-              <h3 className="font-bold text-lg text-gray-800">Important Deadlines</h3>
-            </div>
-            <p className="text-gray-700 pl-9">
-              Early applications are strongly encouraged as admission is competitive. Our regular admission deadline is January 15th 
-              for the fall semester and October 1st for the spring semester. Late applications may be considered on a space-available 
-              basis. All supporting documents must be received within two weeks of the application deadline.
-            </p>
-          </div>
-        </div>
-        {/* youtube video */}
-        <div className='w-full my-9 items-center flex justify-center'>
-            <iframe width="1080" height="700" className='rounded-md md:h-96 h-64 md:w-full' src="https://www.youtube.com/embed/OM--5qQrZ8s?si=rTbzH6WNCyCwb_nS" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-        </div>
+        {/* CTA Section */}
+<div className="bg-white rounded-xl shadow-md overflow-hidden">
+  <div className="md:flex items-center">
+    
+    {/* Text Block */}
+    <div className="w-full p-8 md:p-12">
+      {/* Badge */}
+      <div className="inline-flex items-center bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold mb-4">
+        <FaUserGraduate className="mr-2" />
+        Admissions Open 2025
+      </div>
 
-        {/* CTA */}
-        <div 
-          ref={ctaRef}
-          className="mt-16 text-center"
-        >
-          <div className="bg-gradient-to-r from-orange-400 to-orange-600 rounded-2xl p-8 text-white shadow-xl">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Begin Your Journey?</h2>
-            <p className="text-orange-100 mb-6 max-w-2xl mx-auto">
-              Join our community of scholars and innovators. Start your application today and take the first step toward an exceptional educational experience.
-            </p>
-            <button className="bg-white text-orange-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-orange-50 transition-all duration-300 transform hover:scale-105 active:scale-95">
-              Start Application Now
-            </button>
-          </div>
-        </div>
+      {/* Title */}
+      <h2 className="text-3xl font-bold text-gray-800 mb-4">Ready to begin your journey with us?</h2>
+
+      {/* Subtext */}
+      <p className="text-gray-600 mb-6">
+        Unlock a world of opportunities by enrolling in a school that prioritizes curiosity, creativity, and character.
+      </p>
+
+      {/* Highlights List */}
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+        {highlights.map((item, index) => (
+          <li key={index} className="flex items-center text-orange-300">
+            <span className="bg-blue-100 text-blue-500 rounded-full p-1 mr-3">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      {/* Register Button */}
+      <button className="bg-gradient-to-r from-blue-500 to-red-500 hover:from-blue-600 hover:to-red-600 text-white font-bold py-3 px-8 rounded-full flex items-center transition-all duration-300 shadow-lg hover:shadow-xl">
+        Register Now <FaArrowRight className="ml-2" />
+      </button>
+    </div>
+  </div>
+</div>
       </div>
     </div>
   );
 };
 
-export default AdmissionProcess;
+export default AdmissionProcessPage;
+
+
